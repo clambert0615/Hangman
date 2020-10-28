@@ -1,0 +1,10 @@
+﻿@using Hangman.Models
+@model Words
+
+<form action="/Hangman/Guess" method="post">
+    <label for="guess">Guess a letter</label>
+    <input type="text" id="guess" name="guess" placeholder="Enter a letter" />
+    <input type="hidden" id="word" name="word" value="@Model.Word" />
+    <input type="submit" value="Submit" />
+</form>
+
