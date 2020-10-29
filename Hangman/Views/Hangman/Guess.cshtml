@@ -1,0 +1,26 @@
+﻿@using Hangman.Models
+@model Guess
+
+<h3>Word: @Model.EncryptedWord</h3>
+<br />
+<h4>
+    Letters already guessed:
+    @foreach (char l in Model.Guessed)
+    {
+        <b>@l</b>
+    }
+
+</h4>
+
+<br />
+<h4>Guesses Remaining: @Model.GuessesLeft</h4>
+<br />
+<form action="/Hangman/Guess" method="post">
+    <label for="guess">Guess a letter</label>
+    <input type="text" id="guess" name="guess" placeholder="Enter a letter" />
+    <input type="hidden" id="Word" name="Word" value="@Model.Word" />
+    <input type="hidden" id="Guessed" name="Guessed" value="@Model.Guessed" />
+    <input type="hidden" id="EncryptedWord" name="EncryptedWord" value="@Model.EncryptedWord" /> 
+    <input type="hidden" id="GuessesLeft" name="GuessesLeft" value="@Model.GuessesLeft" />
+    <input type="submit" value="Submit" />
+</form>
