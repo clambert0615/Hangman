@@ -1,10 +1,22 @@
-﻿@using Hangman.Models
-@model Guess
-
-<h3>Word: @foreach (var c in Model.EncryptedWord)
+﻿@if (ViewBag.Message != null)
 {
-    @c
-}</h3>
+    <h1>Results</h1>
+    <br />
+    <h3>@ViewBag.Message</h3>
+    <br />
+    <button onclick="document.location='/Hangman/Index'">Play Again</button>
+    
+}
+
+else
+{
+
+<h3>
+    Word: @foreach (var c in Model.EncryptedWord)
+    {
+        @c
+    }
+</h3>
 <br />
 <h4>
     Letters already guessed:
@@ -27,12 +39,13 @@
     <input type="hidden" id="Word" name="Word" value="@Model.Word" />
     @foreach (var g in Model.Guessed)
     {
-    <input type="hidden" name="Guessed" value="@g" />
+        <input type="hidden" name="Guessed" value="@g" />
     }
     @foreach (var c in Model.EncryptedWord)
     {
-    <input type="hidden" name="EncryptedWord" value="@c" /> 
+        <input type="hidden" name="EncryptedWord" value="@c" />
     }
     <input type="hidden" id="GuessesLeft" name="GuessesLeft" value="@Model.GuessesLeft" />
     <input type="submit" value="Submit" />
 </form>
+}
