@@ -13,5 +13,6 @@ namespace Hangman.Models
         public List<char>  Guessed { get; set; }
 
         public int GuessesLeft { get; set; }
+        public string DupeMessage { get; set; }
     }
 }

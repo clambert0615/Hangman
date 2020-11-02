@@ -1,13 +1,16 @@
 ﻿@using Hangman.Models
 @model Words
 
+<div style="text-align:center">
 <h3>Your word is @Model.Word.Length letters long </h3>
-
+<br />
+<img src="~/Images/questionmark.jpg" />
+<br />
 <form action="/Hangman/Guess" method="post">
     <label for="guess">Guess a letter</label>
     <input type="text" id="guess" name="guess" placeholder="Enter a letter" />
     <input type="hidden" id="word" name="word" value="@Model.Word" />
     <input type="hidden" id="guessesLeft" name="guessesLeft" value="7" />
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Submit" style="background-color:aquamarine" />
 </form>
-
+    </div>

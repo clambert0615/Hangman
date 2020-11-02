@@ -1,0 +1,24 @@
+﻿@using Hangman.Models
+@model Record
+
+
+<br />
+<div style="text-align:center">
+<img src="~/Images/stats.jpg" style="width:35%" />
+    </div>
+<br />
+    <br />
+@if (ViewBag.Message != null)
+{
+    <h3>@ViewBag.Message</h3>
+}
+else
+{
+<h3 style="color:orchid">Wins: @Model.Wins </h3>
+<br />
+<h3 style="color:teal">Losses: @Model.Losses </h3>
+}
+<br />
+<br />
+<button onclick="document.location='/Hangman/Index'" style="background-color:aquamarine">Home</button>
+     

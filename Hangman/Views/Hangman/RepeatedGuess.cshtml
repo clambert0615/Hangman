@@ -1,51 +1,98 @@
-﻿@if (ViewBag.Message != null)
-{
-    <h1>Results</h1>
-    <br />
-    <h3>@ViewBag.Message</h3>
-    <br />
-    <button onclick="document.location='/Hangman/Index'">Play Again</button>
-    
-}
+﻿@using Hangman.Models
+@model Guess
 
-else
-{
+    <div style="text-align:center">
+        @if (ViewBag.Message != null)
+        {
+            <h1>Results</h1>
+            <br />
+            <h3 style="color:teal">@ViewBag.Message</h3>
+            <br />
+            <br />
+            if (ViewBag.Status ==3)
+            {
+                <img src="~/Images/step7.png" />
+            }
+            if (ViewBag.Status == 2)
+            {
 
-<h3>
-    Word: @foreach (var c in Model.EncryptedWord)
-    {
-        @c
-    }
-</h3>
-<br />
-<h4>
-    Letters already guessed:
-    @foreach (char l in Model.Guessed)
-    {
-        <b>@l</b>
-    }
+                <img src="~/Images/sad.gif" />
+            }
+            if(ViewBag.Status == 1)
+            {
+                <img src="~/Images/F8H3.gif" />
 
-</h4>
+            }
+            <br />
+            <button onclick="document.location='/Hangman/Index'" style="background-color:aquamarine">Play Again</button>
 
-<br />
-<h4>Guesses Remaining: @Model.GuessesLeft</h4>
-<br />
-<form action="/Hangman/RepeatedGuess" method="post">
-    <label for="guess">Guess a letter</label>
-    <input type="text" id="guess" name="guess" placeholder="Enter a letter" /><br />
-    OR:<br />
-    <label for="wordGuess">Enter word if you think you know it.</label>
-    <input type="text" id="wordGuess" name="wordGuess" placeholder="Enter a word" /><br />
-    <input type="hidden" id="Word" name="Word" value="@Model.Word" />
-    @foreach (var g in Model.Guessed)
-    {
-        <input type="hidden" name="Guessed" value="@g" />
-    }
-    @foreach (var c in Model.EncryptedWord)
-    {
-        <input type="hidden" name="EncryptedWord" value="@c" />
-    }
-    <input type="hidden" id="GuessesLeft" name="GuessesLeft" value="@Model.GuessesLeft" />
-    <input type="submit" value="Submit" />
-</form>
-}
+        }
+
+        else
+        {
+            if (Model.DupeMessage != null)
+            {
+                <h2>@Model.DupeMessage</h2>
+            }
+            <br />
+            <h3>
+                Word: @foreach (var c in Model.EncryptedWord)
+                {
+                    @c
+                }
+            </h3>
+            <br />
+            <h4>
+                Letters already guessed:
+                @foreach (char l in Model.Guessed)
+                {
+                    <b>@l</b>
+                }
+
+            </h4>
+
+            <br />
+            <h4>Guesses Remaining: @Model.GuessesLeft</h4>
+            <br />
+            @if (Model.GuessesLeft == 5)
+            {
+                <img src="~/Images/step2.png" />
+            }
+            else if (Model.GuessesLeft == 4)
+            {
+                <img src="~/Images/step3.png" />
+            }
+            else if (Model.GuessesLeft == 3)
+            {
+                <img src="~/Images/step4.png" />
+            }
+            else if (Model.GuessesLeft == 2)
+            {
+                <img src="~/Images/step5.png" />
+            }
+            else if (Model.GuessesLeft == 1)
+            {
+                <img src="~/Images/step6.png" />
+            }
+
+            <br />
+            <form action="/Hangman/RepeatedGuess" method="post">
+                <label for="guess">Guess a letter</label>
+                <input type="text" id="guess" name="guess" placeholder="Enter a letter" /><br />
+                OR:<br />
+                <label for="wordGuess">Enter word if you think you know it.</label>
+                <input type="text" id="wordGuess" name="wordGuess" placeholder="Enter a word" /><br />
+                <input type="hidden" id="Word" name="Word" value="@Model.Word" />
+                @foreach (var g in Model.Guessed)
+                {
+                    <input type="hidden" name="Guessed" value="@g" />
+                }
+                @foreach (var c in Model.EncryptedWord)
+                {
+                    <input type="hidden" name="EncryptedWord" value="@c" />
+                }
+                <input type="hidden" id="GuessesLeft" name="GuessesLeft" value="@Model.GuessesLeft" />
+                <input type="submit" value="Submit" style="background-color:aquamarine" />
+            </form>
+        }
+    </div>  
